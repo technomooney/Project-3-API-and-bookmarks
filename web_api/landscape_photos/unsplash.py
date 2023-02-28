@@ -4,9 +4,6 @@ import os
 base_url = 'https://api.unsplash.com/search/photos?'
 key = os.environ.get('UNSPLASH_KEY')
 
-def main():
-    """PLACEHOLDER"""
-
 
 def get_image_response():
     try:
@@ -18,7 +15,3 @@ def get_image_response():
     except Exception as ex:
         print(ex) # TODO - Switch to log instead of print
         return None, ex
-
-
-if __name__ == '__main__':
-    main()
