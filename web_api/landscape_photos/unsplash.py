@@ -1,6 +1,5 @@
 import requests
 import os
-from pprint import pprint
 
 base_url = 'https://api.unsplash.com/search/photos?'
 key = os.environ.get('UNSPLASH_KEY')
