@@ -5,7 +5,7 @@
         <h1>Find a National Park for you!</h1>
     </div>
     <br>
-    <div class="container">
+    <div class="container col-md-8">
       <div id="image_carousel" class="carousel slide">
         <div class="carousel-indicators">
           {% for image in data %}
@@ -15,7 +15,7 @@
         <div class="carousel-inner">
           {% for image in data %}
           <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-            <img src="{{ image.file }}"  class="img-fluid d-block" alt="Slide number {{ loop.index }}" >
+            <img src="{{ image.file }}"  class="d-block w-100" alt="Slide number {{ loop.index }}" >
             <div class="carousel-caption d-none d-md-block ">
               <p class="bs-light-border-subtle">Owner: {{ image.owner }}</p>
             </div>
