@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  {% include 'carousel.html' %}
+    <form class="form-control  bg-color-custom">
+        <label class="form-label">Search a state:</label> <input class="form-input" type="text" id="state_search" name="state_search">
+    </form>
+    {% if not data %}
+    <h4>Results:</h4>
+    <ul class="list-group">
+        {% for item in data %}
+        <li class="list-group-item">{{ item }}</li>
+        {% endfor %}
+        <li class="list-group-item">test</li>
+        <li class="list-group-item">test</li>
+        <li class="list-group-item">test</li>
 
-    <h1 class="container-md">this is a test homepage</h1>
-
+    </ul>
+    {% endif %}
+</div>
 {% endblock %}
