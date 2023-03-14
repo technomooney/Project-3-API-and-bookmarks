@@ -7,6 +7,28 @@ from pprint import pprint
 
 base_url = 'https://developer.nps.gov/api/v1' # Sets a variable base_url to the base URL for the National Park Service API.
 
+# This code defines a class and a function to collect data from the National Park Service API.
+
+class Park():    # The park class has attributes     
+    def __init__(self, park_code, full_name): # the init method initializes the first two attributes with given
+        # parameters and sets the rest to None.
+
+        self.park_code = park_code
+        self.full_name = full_name
+        self.description = None
+        self.lat = None
+        self.lon = None
+        self.email = None
+        self.phone = None
+        self.entrance_fees = None
+        self.entrance_passes =  None
+        self.operating_hours = None
+
+    def __repr__(self): # the repr method returns a string representation of the park instance.
+        return f"Park({self.full_name}, {self.park_code})"
+    
+    # this function takes in four parameters state, search query , park_code and limit using the requests library.
+
 def park_data_collection(state, search_query="", park_code=None, limit=5):
     url = base_url + "/parks"
     parks_data_list = [] # it initializes an empty list called parks_data_list and sends 
@@ -33,3 +55,4 @@ def park_data_collection(state, search_query="", park_code=None, limit=5):
         parks_data_list.append(new_park)
 
     return parks_data_list    
+ 
