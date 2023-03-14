@@ -9,6 +9,7 @@ def get_image_response():
     try:
         query = {'query': 'national parks', 'page': 1, 'per_page': 10, 'orientation': 'landscape', 'client_id': key}
         response = requests.get(base_url, params=query)
+        print(response.url)
         response.raise_for_status()
         data = response.json()
         return data, None
