@@ -1,58 +1,55 @@
 # This section imports necessary libraries requests , os , logging and pprint.
 
-import requests
 import os
-import logging
-from pprint import pprint
+import requests
+from typing import List
+from park import Park
 
 base_url = 'https://developer.nps.gov/api/v1' # Sets a variable base_url to the base URL for the National Park Service API.
 
-# This code defines a class and a function to collect data from the National Park Service API.
+# The get_parks_data function is called with the specified search criteria. 
+# This function constructs a URL with the API endpoint and parameters, 
+# and sends a GET request to retrieve data from the API. The response data is converted to JSON format 
+# and the "data" field is extracted as a list of dictionaries.
 
-class Park():    # The park class has attributes     
-    def __init__(self, park_code, full_name): # the init method initializes the first two attributes with given
-        # parameters and sets the rest to None.
-
-        self.park_code = park_code
-        self.full_name = full_name
-        self.description = None
-        self.lat = None
-        self.lon = None
-        self.email = None
-        self.phone = None
-        self.entrance_fees = None
-        self.entrance_passes =  None
-        self.operating_hours = None
-
-    def __repr__(self): # the repr method returns a string representation of the park instance.
-        return f"Park({self.full_name}, {self.park_code})"
-    
-    # this function takes in four parameters state, search query , park_code and limit using the requests library.
-
-def park_data_collection(state, search_query="", park_code=None, limit=5):
-    url = base_url + "/parks"
-    parks_data_list = [] # it initializes an empty list called parks_data_list and sends 
+def get_parks_data(state: str, search_query: str = "", park_code: str = None, limit: int = 5) -> List[dict]:
+    url = f"{base_url}/parks"
     api_key = os.getenv('NPS_API_KEY') # a GET request to the National Park Service API.
-    query = {"api_key": api_key, "q": search_query, "stateCode": state, "limit": limit, "parkCode": park_code} 
+    query = {"api_key":api_key, "q": search_query, "stateCode": state, "limit": limit, "parkCode": park_code}
     response = requests.get(url, params=query)
     response_data = response.json()
+    return response_data.get("data", [])
 
-# It then loops through the response data, creating a new Park instance for each park and populating its attributes 
-# with the appropriate data. 
+# The process_parks_data function is called with the list of dictionaries returned by get_parks_data.
+#  This function iterates over each dictionary and creates a Park object for each one.
+#  The Park object is initialized with the "parkCode" and "fullName" fields,
+#  and other relevant fields are assigned if they exist in the dictionary. The Park object is added to a list of Park objects.
 
-    for park in response_data["data"]:
-        new_park = Park(park["parkCode"], park["fullName"])
-        new_park.description = park.get("description")
-        new_park.lat = park.get("latitude")
-        new_park.lon = park.get("longitude")
-        new_park.phone = park.get("contacts")[0].get("phoneNumbers")[0].get("phoneNumber")
-        new_park.email = park.get("contacts")[0].get("emailAddresses")[0].get("emailAddress")
-        new_park.entrance_fees = park.get("entrancePasses")
-        new_park.entrance_passes = park.get("entrancePasses")
-        new_park.operating_hours = park.get("operatingHours")
-        
-# It then appends the Park instance to the parks_data_list and returns it.
-        parks_data_list.append(new_park)
+def process_parks_data(parks_data: List[dict]) -> list[Park]:
+    parks = []
+    for park_data in parks_data:
+        park = Park(park_data["parkCode"], parks_data["fullName"])
+        park.description = park_data.get("description")
+        park.lat = park_data.get("latitude")
+        park.lon = park_data.get("longitude")
+        contacts = park_data.get("contacts", [])
+        if contacts:
+            phone_numbers = contacts[0].get("phoneNumbers", [])
+            if phone_numbers:
+                park.phone = phone_numbers[0].get("phoneNumber")
+            email_addresses = contacts[0].get("emailAddresses", [])
+            if email_addresses:
+                park.email = email_addresses[0].get("emailAddress")
+        park.entrance_fees = park_data.get("entranceFees")
+        park.entrance_passes = park_data.get("entrancePasses")
+        park.operating_hours = park_data.get("operatingHours")
+        parks.append(park)
+    return parks
+# The get_parks function is called with the specified search criteria. 
+# This function calls get_parks_data to retrieve the data, and then calls process_parks_data to create a list of Park objects. 
+# The list of Park objects is returned as the function result.
 
-    return parks_data_list    
- 
+def get_parks(state: str, search_query: str = "", park_code: str = None, limit: int = 5) -> List[Park]:
+    parks_data = get_parks_data(state, search_query, park_code, limit)
+    parks = process_parks_data(parks_data)
+    return parks
