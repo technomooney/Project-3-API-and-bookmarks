@@ -13,7 +13,6 @@ class ParkWeather():
 
 # Read API key from environment variable
 api_key = os.environ['WEATHER_KEY']
-url = 'https://api.openweathermap.org/data/2.5/forecast'
 
 def get_api_response(park_object,url='https://api.openweathermap.org/data/2.5/forecast'):
     # Set query parameters for API request
@@ -29,7 +28,7 @@ def get_api_response(park_object,url='https://api.openweathermap.org/data/2.5/fo
         error = (f'API request failed: {e.response}',e)
         return None,error
 
-        
+
 def extract_data(park_weather,forecast_response):
 
     """
@@ -56,9 +55,18 @@ def extract_data(park_weather,forecast_response):
                                                                             item['weather'][0]['description'],
                                                                             item['wind']['speed']
                                                                             ]})
-            
 
 if __name__ == '__main__':
-    forecast_response,error = get_api_response(lat=44.59824417,lon=-110.5471695)
-    yellowstone_weather = ParkWeather(park_code='yell')
+    class Park():
+        def __init__(self):
+            self.lat = 44.59824417
+            self.lon = -110.5471695
+            self.park_code = "yell"
+    yellowstone_park = Park()
+    print(yellowstone_park.lat)
+    forecast_response, error = get_api_response(yellowstone_park)
+    print(error)
+    yellowstone_weather = ParkWeather(yellowstone_park.park_code)
+    pprint(yellowstone_weather.forecast)
     extract_data(yellowstone_weather,forecast_response)
+    pprint(yellowstone_weather.forecast)
