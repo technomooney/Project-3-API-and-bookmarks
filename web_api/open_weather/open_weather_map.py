@@ -34,7 +34,8 @@ def extract_data(park_weather,forecast_response):
 
     """
     forecast data is in the following format for the weather object.
-    Tuesday:{15:00:00: [temp, feels_like temp, weather desc, wind speed]
+    {'Tuesday':{15:00:00: [temp, feels_like temp, weather desc, wind speed],...},
+    'Wednesday':{12:00:00: [temp, feels_like temp, weather desc, wind speed],...},etc}
     """
     # Loop over forecast data and add data to the weather object
     for item in forecast_response:
