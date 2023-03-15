@@ -15,9 +15,9 @@ class ParkWeather():
 api_key = os.environ['WEATHER_KEY']
 url = 'https://api.openweathermap.org/data/2.5/forecast'
 
-def get_api_response(lat,lon,url='https://api.openweathermap.org/data/2.5/forecast'):
+def get_api_response(park_object,url='https://api.openweathermap.org/data/2.5/forecast'):
     # Set query parameters for API request
-    params = {'lat':lat,'lon':lon, 'units': 'imperial', 'appid': api_key}
+    params = {'lat':park_object.lat,'lon':park_object.lon, 'units': 'imperial', 'appid': api_key}
 
     # Send API request and handle errors, return data
     try:
