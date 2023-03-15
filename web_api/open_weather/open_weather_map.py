@@ -1,12 +1,12 @@
 import requests
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 
 class weather_data():
     def __init__(self,park_code:str, location:str) -> None:
         self.park_code = park_code
         self.location = location
-        weather_info_list: list
+        forecast: dict
 
 
     
@@ -35,7 +35,10 @@ def get_api_response(url,lat,lon):
         
 def extract_data(weather_object,forecast_response):
     # Loop over forecast data and add data to the weather object
+
     for data in forecast_response:
-        # Extract temperature and wind speed from data
-        weather_object.temp = data['main']['temp']
-        wind_speed = data['wind']['speed']
+        date_time = datetime.datetime.fromtimestamp(1678827600)
+        day_of_week = date_time.strftime("%A")
+        if day_of_week in weather_object.forecast.keys():
+            # Extract temperature and wind speed from data
+            weather_object.append({'day':day_of_week, date_time.strftime("%I:%M %p"):[data['main']['temp']]})
