@@ -35,3 +35,4 @@ def create_image_object():
         new_image = Image(image_url, creator_name, creator_link, image_description)
         images.append(new_image)
         
+        return images
