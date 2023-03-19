@@ -26,7 +26,7 @@ def get_api_response(park_object,url='https://api.openweathermap.org/data/2.5/fo
 def extract_data(park_object,forecast_response):
 
     """
-    forecast data is in the following format for the forecast attribute.
+    forecast data is in the following format for the forecast attribute of the park object that was passed.
     {'Tuesday':[[15:00:00, [temp, feels_like temp, weather desc, wind speed], dt], [...], [...]]
     'Wednesday':[[12:00:00, [temp, feels_like temp, weather desc, wind speed], dt], [...], [...]],... etc}
     """
