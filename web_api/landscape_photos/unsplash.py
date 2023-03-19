@@ -22,7 +22,6 @@ def get_image_response():
         data_result = data.get('results')
         return data_result, None # Return data in json format if no errors occured during request
     except Exception as ex:
-        print(ex) # TODO - Switch to log instead of print
         return None, ex # Return any exceptions to be handled outside the function
     
 
