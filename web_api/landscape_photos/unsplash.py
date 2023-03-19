@@ -42,7 +42,7 @@ def create_image_object_list(results_data):
         new_image = Image(image_url, creator_name, creator_link, image_description) # Create new image and add to list of image objects
         images.append(new_image)
         
-        return images
+    return images
 
 if __name__ == '__main__':
     response, Error = get_image_response()
