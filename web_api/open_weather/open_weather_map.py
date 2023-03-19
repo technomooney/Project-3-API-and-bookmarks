@@ -2,12 +2,7 @@ import requests
 import os
 from datetime import datetime
 from pprint import pprint
-
-class ParkWeather():
-    def __init__(self,park_code:str) -> None:
-        self.park_code = park_code  
-        self.forecast: dict = {}
-
+from parkweather import ParkWeather
 # Configure logging
 # logging.basicConfig(filename='weather.log', level=logging.INFO)
 
@@ -36,33 +31,38 @@ def extract_data(park_weather,forecast_response):
     {'Tuesday':{15:00:00: [temp, feels_like temp, weather desc, wind speed],...},
     'Wednesday':{12:00:00: [temp, feels_like temp, weather desc, wind speed],...},etc}
     """
-    # Loop over forecast data and add data to the weather object
-    for item in forecast_response:
-        date_time = datetime.fromtimestamp(item['dt']) # convert the unix timestamp to a datetime object
-        day_of_week = date_time.strftime("%A") # get the day that this specific entry is on
-        if day_of_week not in park_weather.forecast.keys():
-            # Extract data from the forecast response and store it in the dictionary
-            # using the day of the week in as the dye and the time of day for each 3 hour section.
-            # use a list for the specific data like temp
-            park_weather.forecast[day_of_week] = [{date_time.strftime("%X"):[item['main']['temp'], 
-                                                                            item['main']['feels_like'],
-                                                                            item['weather'][0]['description'],
-                                                                            item['wind']['speed']
-                                                                            ]}]
-        else:
-            park_weather.forecast[day_of_week].append({date_time.strftime("%X"):[item['main']['temp'], 
-                                                                            item['main']['feels_like'],
-                                                                            item['weather'][0]['description'],
-                                                                            item['wind']['speed']
-                                                                            ]})
-
+    try:
+        # Loop over forecast data and add data to the weather object
+        for item in forecast_response:
+            date_time = datetime.fromtimestamp(item['dt']) # convert the unix timestamp to a datetime object
+            day_of_week = date_time.strftime("%A") # get the day that this specific entry is on
+            if day_of_week not in park_weather.forecast.keys():
+                # Extract data from the forecast response and store it in the dictionary
+                # using the day of the week in as the dye and the time of day for each 3 hour section.
+                # use a list for the specific data like temp
+                park_weather.forecast[day_of_week] = [{date_time.strftime("%X"):[item['main']['temp'], 
+                                                                                item['main']['feels_like'],
+                                                                                item['weather'][0]['description'],
+                                                                                item['wind']['speed']
+                                                                                ]}]
+            else:
+                park_weather.forecast[day_of_week].append({date_time.strftime("%X"):[item['main']['temp'], 
+                                                                                item['main']['feels_like'],
+                                                                                item['weather'][0]['description'],
+                                                                                item['wind']['speed']
+                                                                                ]})
+        return None
+    except ValueError as val_err:
+        return val_err
+    except Exception as err:
+        return err
 if __name__ == '__main__':
-    class Park():
+    class TestPark():
         def __init__(self):
             self.lat = 44.59824417
             self.lon = -110.5471695
             self.park_code = "yell"
-    yellowstone_park = Park()
+    yellowstone_park = TestPark()
     print(yellowstone_park.lat)
     forecast_response, error = get_api_response(yellowstone_park)
     print(error)
