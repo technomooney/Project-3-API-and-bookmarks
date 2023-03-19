@@ -2,6 +2,7 @@ import requests
 import os
 from datetime import datetime
 from pprint import pprint
+from collections import OrderedDict
 # Configure logging
 # logging.basicConfig(filename='weather.log', level=logging.INFO)
 
@@ -32,6 +33,7 @@ def extract_data(park_object,forecast_response):
     """
     try:
         # Loop over forecast data and add data to the weather object
+        park_object.forecast = OrderedDict()
         for item in forecast_response:
             date_time = datetime.fromtimestamp(item['dt']) # convert the unix timestamp to a datetime object
             day_of_week = date_time.strftime("%A") # get the day that this specific entry is on
@@ -70,7 +72,7 @@ if __name__ == '__main__':
             self.lat = 44.59824417
             self.lon = -110.5471695
             self.park_code = "yell"
-            self.forecast: dict = {}
+            self.forecast: OrderedDict = {}
     yellowstone_park = TestPark()
     print(yellowstone_park.lat)
     forecast_response, error = get_api_response(yellowstone_park)
