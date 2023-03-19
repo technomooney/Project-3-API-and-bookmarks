@@ -1,6 +1,7 @@
 import requests
 import os
 from image import Image
+from pprint import pprint
 
 base_url = 'https://api.unsplash.com/search/photos?'
 key = os.environ.get('UNSPLASH_KEY')
@@ -18,23 +19,22 @@ def get_image_response():
         response = requests.get(base_url, params=query)
         response.raise_for_status() # Raise exception if a client or server error occurs
         data = response.json()
-        return data # Return data in json format if no errors occured during request
+        data_result = response.json().get('results')
+        return data_result, None # Return data in json format if no errors occured during request
     except Exception as ex:
         print(ex) # TODO - Switch to log instead of print
-        return ex # Return any exceptions to be handled outside the function
+        return None, ex # Return any exceptions to be handled outside the function
     
 
-def create_image_object():
+def create_image_object_list(results_data):
     """This function calls the get_image_response function
     to be parsed into an image object. For each of the 10
     images on the page, it collects the image URL, creator's name,
     link to the creator's profile, and a description of the image.
     Function returns a list of 10 image objects."""
-
-    results = get_image_response.get('results') # Retrieve API response and get necessary resultset
     images = [] # Empty list to be filled with 10 image objects
     
-    for image in results: # Gather needed data from each image dictionary
+    for image in results_data: # Gather needed data from each image dictionary
         image_url = image.get('urls')['regular'] 
         creator_name = image.get('user')['name']
         creator_link = image.get('user')['links']['self']
@@ -44,3 +44,8 @@ def create_image_object():
         images.append(new_image)
         
         return images
+
+if __name__ == '__main__':
+    response, Error = get_image_response()
+    images = create_image_object_list(response)
+    pprint(images)
