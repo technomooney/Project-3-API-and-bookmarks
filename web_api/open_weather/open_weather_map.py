@@ -40,17 +40,26 @@ def extract_data(park_weather,forecast_response):
                 # Extract data from the forecast response and store it in the dictionary
                 # using the day of the week in as the dye and the time of day for each 3 hour section.
                 # use a list for the specific data like temp
-                park_weather.forecast[day_of_week] = [{date_time.strftime("%X"):[item['main']['temp'], 
-                                                                                item['main']['feels_like'],
-                                                                                item['weather'][0]['description'],
-                                                                                item['wind']['speed']
-                                                                                ]}]
-            else:
-                park_weather.forecast[day_of_week].append({date_time.strftime("%X"):[item['main']['temp'], 
-                                                                                item['main']['feels_like'],
-                                                                                item['weather'][0]['description'],
-                                                                                item['wind']['speed']
-                                                                                ]})
+                park_weather.forecast[day_of_week] = [
+                                                        date_time.strftime("%X"),
+                                                        [
+                                                            item['main']['temp'], 
+                                                            item['main']['feels_like'],
+                                                            item['weather'][0]['description'],
+                                                            item['wind']['speed']
+                                                        ],
+                                                        item['dt']
+                                                    ]  
+    else:                                                                       
+                park_weather.forecast[day_of_week].append([
+                                                            date_time.strftime("%X"),
+                                                            [
+                                                                item['main']['temp'], 
+                                                                item['main']['feels_like'],
+                                                                item['weather'][0]['description'],
+                                                                item['wind']['speed']
+                                                            ],
+                                                            item['dt']])
         return None
     except ValueError as val_err:
         return val_err
