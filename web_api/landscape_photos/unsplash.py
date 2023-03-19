@@ -19,7 +19,7 @@ def get_image_response():
         response = requests.get(base_url, params=query)
         response.raise_for_status() # Raise exception if a client or server error occurs
         data = response.json()
-        data_result = response.json().get('results')
+        data_result = data.get('results')
         return data_result, None # Return data in json format if no errors occured during request
     except Exception as ex:
         print(ex) # TODO - Switch to log instead of print
@@ -48,4 +48,4 @@ def create_image_object_list(results_data):
 if __name__ == '__main__':
     response, Error = get_image_response()
     images = create_image_object_list(response)
-    pprint(images)
+    print(images)
