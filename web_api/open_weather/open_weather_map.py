@@ -80,3 +80,7 @@ if __name__ == '__main__':
     pprint(yellowstone_park.forecast)
     extract_data(yellowstone_park,forecast_response)
     pprint(yellowstone_park.forecast)
+    for x,y in yellowstone_park.forecast.items():
+        print(x)
+        print(y)
+        print()
