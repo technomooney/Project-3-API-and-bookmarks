@@ -2,6 +2,9 @@
 on the specific data available for each park. but I can fill in the code to make these methods work 
 properly for your use case. """
 
+"""You can modify the attributes of the Park class to include any additional data that you want to extract from the National Park Service API. """
+
+
 # The Park class has two attributes: full name and description.
 class Park: 
 
