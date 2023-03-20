@@ -1,0 +1,36 @@
+
+{% block weather_table %}
+<h4>{{ park.full_name }}</h4>
+    {% for day in park.forecast.keys() %}
+    <h3>{{ day }}</h3>
+    <table class="table-bordered">
+        <tr>
+            <th>Time of Day (24hr)</th>
+            <th>Temp</th>
+            <th>Feel Like</th>
+            <th>Short Description</th>
+            <th>Wind Speed</th>
+        </tr>
+            {% for item in park.forecast.get(day) %}
+            <tr>
+                <td>
+                    {{ item[0] }}
+                </td>
+                <td>
+                    {{ item[1][0]}} &#176;F
+                </td>
+                <td>
+                    {{ item[1][1] }} &#176;F
+                </td>
+                <td>
+                    {{ item[1][2] }}
+                </td>
+                <td>
+                    {{ item[1][3] }} MPH
+                </td>
+            </tr>
+            {% endfor %}
+    {% endfor %}
+    </table>
+
+{% endblock %}
