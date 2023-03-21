@@ -1,4 +1,7 @@
+import requests
 import sqlite3
+import os
+from image import Image
 
 db = 'bookmark.db'
 
@@ -32,6 +35,25 @@ class Parks:
 
     def __getattr__(self, name):
         return getattr(self.instance, name)
+    
+    def populate_unsplash_table(self):
+        # call create_image_object to retrieve list of image objects
+        images = create_image_object()
+        
+        # insert each image into Unsplash table
+        conn = sqlite3.connect(db)
+        with conn:
+            for image in images:
+                # SQL statement to insert image data
+                insert_sql = '''INSERT INTO Unsplash
+                                (ParkCode, ImageURL, ImageDescription, Creator, CreatorURL)
+                                VALUES (?, ?, ?, ?, ?)'''
+
+                # execute SQL statement with image data
+                conn.execute(insert_sql, (self.park_code, image.image_url, image.description,
+                                          image.creator_name, image.creator_link))
+        conn.commit()
+        conn.close()
     
 if __name__ == '__main__':
     Parks()
