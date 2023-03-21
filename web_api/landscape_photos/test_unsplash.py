@@ -17,3 +17,15 @@ class TestUnsplash(TestCase):
         results = unsplash.get_image_response()
 
         self.assertEqual(expected_narrowed_results, results[0])
+    
+
+    @patch('requests.get')
+    def test_get_image_response_returns_10_images(self, mock_response):
+        
+        example_api_response = mock_expected_results.mock_expected_narrowed_results
+        mock_response().json.return_value = example_api_response
+
+        expected_number_results = 10
+        number_results = len(example_api_response)
+
+        self.assertEqual(expected_number_results, number_results)
