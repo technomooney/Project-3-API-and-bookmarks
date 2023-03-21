@@ -13,8 +13,8 @@ def get_image_response():
     and return the json data if no errors occur."""
     
     try: 
-        # Query will request images matching 'national parks'. It requests one page with 10 random images in landscape orientation using env. variable key
-        query = {'query': 'national parks', 'page': 1, 'per_page': 10, 'orientation': 'landscape', 'client_id': key}
+        # Query will request images matching 'national parks'. It requests one page (page 2) with 10 random images in landscape orientation using env. variable key
+        query = {'query': 'national parks', 'page': 2, 'per_page': 10, 'orientation': 'landscape', 'client_id': key}
         response = requests.get(base_url, params=query)
         response.raise_for_status() # Raise exception if a client or server error occurs
         data = response.json()
