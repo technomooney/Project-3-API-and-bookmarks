@@ -22,10 +22,21 @@ class TestUnsplash(TestCase):
     @patch('requests.get')
     def test_get_image_response_returns_10_images(self, mock_response):
         
-        example_api_response = mock_expected_results.mock_expected_narrowed_results
-        mock_response().json.return_value = example_api_response
+        example_api_results = mock_expected_results.mock_expected_narrowed_results
+        mock_response().json.return_value = example_api_results
 
         expected_number_results = 10
-        number_results = len(example_api_response)
+        number_results = len(example_api_results)
 
         self.assertEqual(expected_number_results, number_results)
+
+
+    def test_create_image_object_list_returns_10_items(self):
+        
+        example_api_results = mock_expected_results.mock_expected_narrowed_results
+        image_object_list = unsplash.create_image_object_list(example_api_results)
+
+        expected_number_image_objects = 10
+        number_image_objects = len(image_object_list)
+
+        self.assertEqual(expected_number_image_objects, number_image_objects)    
