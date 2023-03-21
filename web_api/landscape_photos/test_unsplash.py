@@ -41,3 +41,13 @@ class TestUnsplash(TestCase):
         number_image_objects = len(image_object_list)
 
         self.assertEqual(expected_number_image_objects, number_image_objects)     
+
+    
+    def test_create_image_object_list_returns_expected_objects(self):
+        
+        example_api_results = expected_results.expected_narrowed_results
+
+        expected_image_object_list  = expected_results.expected_image_object_list
+        image_object_list = str(unsplash.create_image_object_list(example_api_results))
+
+        self.assertEqual(expected_image_object_list, image_object_list)
