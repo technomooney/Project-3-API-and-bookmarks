@@ -5,6 +5,7 @@ import unsplash
 import test_data.mock_unsplash_data as mock_unsplash_data
 import test_data.mock_expected_results as mock_expected_results
 
+
 class TestUnsplash(TestCase):
 
     @patch('requests.get')
@@ -14,9 +15,9 @@ class TestUnsplash(TestCase):
         mock_response().json.return_value = example_api_response
 
         expected_narrowed_results = mock_expected_results.mock_expected_narrowed_results
-        results = unsplash.get_image_response()
+        results, error = unsplash.get_image_response()
 
-        self.assertEqual(expected_narrowed_results, results[0])
+        self.assertEqual(expected_narrowed_results, results)
     
 
     @patch('requests.get')
@@ -39,4 +40,4 @@ class TestUnsplash(TestCase):
         expected_number_image_objects = 10
         number_image_objects = len(image_object_list)
 
-        self.assertEqual(expected_number_image_objects, number_image_objects)    
+        self.assertEqual(expected_number_image_objects, number_image_objects)     
