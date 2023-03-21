@@ -7,5 +7,5 @@ import unsplash
 class UnsplashTest(TestCase):
 
     @patch('unsplash.get_image_response')
-    def test_get_image_response(self, mock_response):
+    def test_get_image_response_successful(self, mock_response):
         """"""
