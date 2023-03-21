@@ -54,6 +54,25 @@ class Parks:
                                           image.creator_name, image.creator_link))
         conn.commit()
         conn.close()
+
+    def populate_openweather_table(self):
+        # call extract_data to retrieve dictionary of list of the forecast
+        weather = extract_data(self, forecast_response)
+
+        # insert each forecast record into OpenWeather table
+        conn = sqlite3.connect(db)
+        with conn:
+            for day, forecast in weather.items():
+                for time, values in forecast:
+                    # SQL statement to insert forecast data
+                    insert_sql = '''INSERT INTO OpenWeather
+                                    (ParkCode, Day, TimeOfDay, Temperature, FeelsLike, WeatherDescription, WindSpeed)
+                                    VALUES (?, ?, ?, ?, ?, ?, ?)'''
+
+                    # execute SQL statement with forecast data
+                    conn.execute(insert_sql, (self.park_code, day, time, values[0], values[1], values[2], values[3]))
+        conn.commit()
+        conn.close()
     
 if __name__ == '__main__':
     Parks()
