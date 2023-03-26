@@ -32,12 +32,13 @@ def create_park_objects_list(data):
         name = park['fullName'],
         description = park['description'],
         state_code = park['states'],
-        location = park['latLong'],
+        latitude = park['latitude']
+        longitude = park['longitude']
         park_code = park['parkCode'],
         phone = park['contacts']['phoneNumbers'][0]['phoneNumber'],
         email = park['contacts']['emailAddresses'][0]['emailAddress']
 
-        park = Park(name, description, state_code, location, park_code, phone, email)
+        park = Park(name, description, state_code, latitude, longitude, park_code, phone, email)
         parks.append(park)
 
     return parks    
