@@ -10,6 +10,7 @@ def get_parks_data(query):
     """GET request from NPS API using the search query given when the function is called.
     Turns response into JSON and catches any exceptions that are raised. Returns data/None
     if there aren't any errors, and None/exception if there are any errors."""
+
     try:
         params = {'q': query, 'api_key': api_key}
         response = requests.get(url, params=params) # Send a GET request to the API with the query parameters
@@ -25,6 +26,7 @@ def create_park_objects_list(data):
     """Create a Park object out of each object in the API response containing the park's
     name, description, state_code, location, park_code, phone, and email. 
     The function returns a list of park objects."""
+    
     park_data, error = data # Unpack tuple that holds either data or exception
     parks = [] # Store park objects
     

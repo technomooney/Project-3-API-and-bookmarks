@@ -43,12 +43,7 @@ if __name__ == '__main__':
 
 
 # Documentation | Resources
-"""
-https://docs.python.org/3/library/unittest.mock.html
+"""https://docs.python.org/3/library/unittest.mock.html
 https://ralphmcneal.com/unit-testing-with-pythons-patch-decorator/
 
-https://stackoverflow.com/questions/15753390/how-can-i-mock-requests-and-the-response
-
-
-
-"""
+https://stackoverflow.com/questions/15753390/how-can-i-mock-requests-and-the-response"""

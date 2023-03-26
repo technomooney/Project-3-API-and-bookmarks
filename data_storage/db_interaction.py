@@ -1,27 +1,19 @@
 import requests
 import sqlite3
 import os
-from image import Image
 
 db = 'bookmark.db'
 
 class ParksDB:
-    """
-    A class that represents a collection of national parks.
-    """
-
+    """A class that represents a collection of national parks."""
 
     instance = None
 
     class __Parks:
-        """
-        A private class that initializes the necessary tables in the database.
-        """
+        """A private class that initializes the necessary tables in the database."""
 
         def __init__(self):
-            """
-            Initializes the database by creating three tables: NPS, Unsplash, and OpenWeather.
-            """
+            """Initializes the database by creating three tables: NPS, Unsplash, and OpenWeather."""
 
             create_NPS_table = 'CREATE TABLE IF NOT EXISTS NPS (ParkCode INTEGER PRIMARY KEY, ParkName TEXT, Latitude DECIMAL(3,8), Longitude DECIMAL(3,8), ParkDescription TEXT, PhoneNum TEXT, Email TEXT)'
 
@@ -40,28 +32,25 @@ class ParksDB:
             conn.close()
 
     def __init__(self):
-        """
-        Initializes the instance of the Parks class and creates an instance of the __Parks class if it doesn't already exist.
-        """
+        """Initializes the instance of the Parks class and creates an instance of the __Parks class if it doesn't already exist."""
+
         if not ParksDB.instance:
             ParksDB.instance = ParksDB.__Parks()
 
     def __getattr__(self, name):
-        """
-        Retrieves the attribute specified by the name parameter from the instance of the __Parks class.
-        """
+        """Retrieves the attribute specified by the name parameter from the instance of the __Parks class."""
+
         return getattr(self.instance, name)
     
     def populate_nps_table(self, park):
-        """
-        Populates the NPS table in the database with the data of the specified park.
+        """Populates the NPS table in the database with the data of the specified park.
 
         Parameters:
         park (object): A national park object containing its relevant data.
 
         Returns:
-        None
-        """
+        None"""
+
         # SQL statement to insert park data
         insert_sql = '''INSERT INTO NPS
                         (ParkCode, ParkName, Latitude, Longitude, ParkDescription, PhoneNum, Email)
@@ -76,15 +65,14 @@ class ParksDB:
         conn.close()
     
     def populate_unsplash_table(self):
-        """
-        Populates the Unsplash table in the database with the image data of the specified park.
+        """Populates the Unsplash table in the database with the image data of the specified park.
 
         Parameters:
         None
 
         Returns:
-        None
-        """
+        None"""
+
         # call create_image_object to retrieve list of image objects
         images = create_image_object()
         
@@ -104,15 +92,14 @@ class ParksDB:
         conn.close()
 
     def populate_openweather_table(self):
-        """
-        Populates the OpenWeather table with forecast data for the park.
+        """Populates the OpenWeather table with forecast data for the park.
 
         Args:
         forecast_response (dict): A dictionary containing the forecast data for the park.
 
         Returns:
-        None.
-        """
+        None."""
+        
         # call extract_data to retrieve dictionary of list of the forecast
         weather = extract_data(self, forecast_response)
 

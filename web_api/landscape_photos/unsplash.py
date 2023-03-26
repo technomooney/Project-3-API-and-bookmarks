@@ -30,7 +30,7 @@ def create_image_object_list(results_data):
     images on the page, it collects the image URL, creator's name,
     link to the creator's profile, and a description of the image.
     Function returns a list of 10 image objects."""
-    
+        
     images = [] # Empty list to be filled with 10 image objects
     
     for image in results_data: # Gather needed data from each image dictionary

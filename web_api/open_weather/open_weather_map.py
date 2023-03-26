@@ -5,9 +5,7 @@ from pprint import pprint
 from collections import OrderedDict
 # Configure logging
 # logging.basicConfig(filename='weather.log', level=logging.INFO)
-
-""" functions for getting weather for a specific latitude and longitude and extract the data in a useful 5 day format """
-
+"""functions for getting weather for a specific latitude and longitude and extract the data in a useful 5 day format"""
 
 # Read API key from environment variable
 api_key = os.environ['WEATHER_KEY']
@@ -28,12 +26,10 @@ def get_api_response(lat,lon,url='https://api.openweathermap.org/data/2.5/foreca
 
 
 def extract_data(forecast_response):
-
-    """
-    forecast data is in the following format for the forecast attribute of the park object that was passed.
+    """forecast data is in the following format for the forecast attribute of the park object that was passed.
     {'Tuesday':[[15:00:00, [temp, feels_like temp, weather desc, wind speed], dt], [...], [...]]
-    'Wednesday':[[12:00:00, [temp, feels_like temp, weather desc, wind speed], dt], [...], [...]],... etc}
-    """
+    'Wednesday':[[12:00:00, [temp, feels_like temp, weather desc, wind speed], dt], [...], [...]],... etc}"""
+
     try:
         # Loop over forecast data and add data to the weather object
         forecast = OrderedDict()
