@@ -28,14 +28,14 @@ def create_park_objects_list(park_data):
     parks = [] # Store park objects
     
     for park in park_data:  # Create a park object for each set of results and add to the park list 
-        name = park['fullName'],
-        description = park['description'],
-        state_code = park['states'],
-        latitude = park['latitude']
-        longitude = park['longitude']
-        park_code = park['parkCode'],
-        phone = park['contacts']['phoneNumbers'][0]['phoneNumber'],
-        email = park['contacts']['emailAddresses'][0]['emailAddress']
+        name = park.get('fullName')
+        description = park.get('description')
+        state_code = park.get('states')
+        latitude = park.get('latitude')
+        longitude = park.get('longitude')
+        park_code = park.get('parkCode')
+        phone = park.get('contacts').get('phoneNumbers')[0].get('phoneNumber')
+        email = park.get('contacts').get('emailAddresses')[0].get('emailAddress')
 
         park = Park(name, description, state_code, latitude, longitude, park_code, phone, email)
         parks.append(park)
