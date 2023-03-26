@@ -39,7 +39,7 @@ def search_parks(query):
         park = Park(
             name=park_data['fullName'],
             description=park_data['description'],
-            state_code=park_data['stateCode'],
+            state_code=park_data['states'],
             location=park_data['latLong'],
             park_code=park_data['parkCode'],
             phone=park_data['contacts']['phoneNumbers'][0]['phoneNumber'],
@@ -69,7 +69,33 @@ def select_parks(parks):
         except ValueError:
             pass
         # if the input is invalid, display an error message.
-        print("Invalid input, please try again. ")
-        
+        print("Invalid input, please try again.")
+
+# The main function to run the program
+def main():
+    # Enter a search query
+    query = input("Enter a search query: ")
+    # Search for parks based on the query
+    parks = search_parks(query)
+    # if no parks were found, display an error message and exit
+    if not parks:
+        print("No parks found.")
+        return
+    # Select a park from the search results
+    park = select_parks(parks)
+
+    # Display the selected park's details
+    print(f"\nSelected park: {park.name} ({park.state_code})")
+    print(f"Description: {park.description}")
+    print(f"Location: {park.location}")
+    print(f"Park Code: {park.park_code}")
+    print(f"Phone: {park.phone}")
+    print(f"Email: {park.email}")
+
+if __name__ == '__main__':
+    main()
+
+
+
 
     
