@@ -17,7 +17,8 @@ def get_unsplash_image_list():
 
 
 def get_national_park_list(search_query):
-    """This function calls the API request function from national_parks.py.
+    """This function calls the API request function from national_parks.py with 
+    a search query entered by the user on the web app.
     The request function either returns a response or an exception;
     if there's an error, it will be logged, else, the create park object
     list function is called and the list of park objects is returned."""
