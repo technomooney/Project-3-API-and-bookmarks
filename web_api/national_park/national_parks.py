@@ -46,4 +46,30 @@ def search_parks(query):
             email=park_data['contacts']['emailAddresses'][0]['emailAddress']
         )
         parks.append(park)
+
+    # Return the list Park objects
+    return parks
+
+# A function to select a park from a list of parks
+def select_parks(parks):
+
+    # Display a numbered list of parks
+    print("Please select a park:")
+    for i, park in enumerate(parks):
+        print(f"{i+1}. {park.name} ({park.state_code})")
+    # Loop until select a valid park
+    while True:
+        # Enter a park number in the program to choice
+        choice = input("Enter park number:")
+        try:
+            index = int(choice) - 1 # convert the input to an index
+            # if the index is within the range of the parks list, return the selected park
+            if 0 <= index < len(parks):
+                return parks[index]
+        except ValueError:
+            pass
+        # if the input is invalid, display an error message.
+        print("Invalid input, please try again. ")
+        
+
     
