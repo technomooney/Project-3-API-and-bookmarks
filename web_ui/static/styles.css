@@ -1,1 +1,7 @@
 /* this is for overrides for bootstrap and adding custom CSS to our page.  */
+.bg-color-custom {
+    background-color: lightgrey;
+}
+.hight-limit {
+    height: auto;
+}
