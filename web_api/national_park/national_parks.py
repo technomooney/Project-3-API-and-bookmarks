@@ -23,4 +23,13 @@ def search_parks(query):
         'fields': 'images', 
         'api_key': os.environ.get('NPS_API_KEY') #The API key (I got the key stored on my pc)
     }
+    #Send a GET request to the API with the query parameters
+    response = requests.get(url, params=params)
+    
+    response.raise_for_status() # Raise an exception if the response status code is not 200 OK
+
+    data = response.json() # Parse the response data as JSON
+
+    # Create a list to store Park objects for each park in the search results.
+    parks = [] 
     
