@@ -51,7 +51,7 @@ def search_parks(query):
     return parks
 
 # A function to select a park from a list of parks
-def select_parks(parks):
+def select_park(parks):
 
     # Display a numbered list of parks
     print("Please select a park:")
@@ -62,14 +62,13 @@ def select_parks(parks):
         # Enter a park number in the program to choice
         choice = input("Enter park number:")
         try:
-            index = int(choice) - 1 # convert the input to an index
+            index = int(choice) - 1    # convert the input to an index
             # if the index is within the range of the parks list, return the selected park
             if 0 <= index < len(parks):
                 return parks[index]
         except ValueError:
             pass
-        # if the input is invalid, display an error message.
-        print("Invalid input, please try again.")
+        print("Invalid input, please try again.") # # if the input is invalid, display an error message.
 
 # The main function to run the program
 def main():
@@ -82,7 +81,7 @@ def main():
         print("No parks found.")
         return
     # Select a park from the search results
-    park = select_parks(parks)
+    park = select_park(parks)
 
     # Display the selected park's details
     print(f"\nSelected park: {park.name} ({park.state_code})")
@@ -96,6 +95,16 @@ if __name__ == '__main__':
     main()
 
 
+# Documentation | Resources
+"""
+- https://www.nps.gov/subjects/developer/api-documentation.htm
+ - https://ahrefs.com/blog/url-parameters/
+ -  https://stackoverflow.com/questions/24518944/try-except-when-using-python-requests-module
+ -  https://gist.github.com/claraj/756c766eb0cea6cd63ce74734534d5a7
+
+ https://rapidapi.com/jonahtaylor/api/national-park-service
+
+"""
 
 
     
