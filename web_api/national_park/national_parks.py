@@ -1,6 +1,6 @@
 import requests
 import os
-from park import Park
+from .park import Park
 
 api_key = os.environ.get('NPS_API_KEY')
 url = 'https://developer.nps.gov/api/v1/parks'
