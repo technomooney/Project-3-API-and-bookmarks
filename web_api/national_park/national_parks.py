@@ -32,4 +32,18 @@ def search_parks(query):
 
     # Create a list to store Park objects for each park in the search results.
     parks = [] 
+
+    # loop through each park in the search results.
+    for park_data in data['data']:
+        # Create a park object for the park and add it to the park list 
+        park = Park(
+            name=park_data['fullName'],
+            description=park_data['description'],
+            state_code=park_data['stateCode'],
+            location=park_data['latLong'],
+            park_code=park_data['parkCode'],
+            phone=park_data['contacts']['phoneNumbers'][0]['phoneNumber'],
+            email=park_data['contacts']['emailAddresses'][0]['emailAddress']
+        )
+        parks.append(park)
     
