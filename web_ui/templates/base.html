@@ -5,6 +5,10 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
     </head>
     <body class="container-fluid bg-color-custom">
+        <nav class="nav">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link" href="/display_saved_parks">Display saved parks</a>
+        </nav>
         {% block content %}
         {% endblock %}
     </body>
