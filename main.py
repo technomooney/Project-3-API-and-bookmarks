@@ -1,11 +1,23 @@
 from flask import Flask, render_template, session, redirect
-from scratch import test
+from web_api.landscape_photos import unsplash
+import dotenv, pathlib, os
+import jsonpickle
 app = Flask(__name__)
 
+dotenv.load_dotenv(dotenv_path=pathlib.Path(".")/".env")
+app.secret_key = os.getenv('SECRET_APP_KEY')
 
 @app.route("/")
 def home():
-    return render_template("index.html", image_list=test_image_data)
+    if not session.get('unsplash_images'):
+        unsplash_response,error = unsplash.get_image_response()
+        session['unsplash_images'] = jsonpickle.encode(unsplash.create_image_object_list(unsplash_response))
+        image_list = jsonpickle.decode(session.get('unsplash_images'))
+        
+    else:
+        image_list = jsonpickle.decode(session.get('unsplash_images'))
+
+    return render_template("index.html", image_list=image_list)
 
 @app.route("/save", methods=['POST'])
 def save():
