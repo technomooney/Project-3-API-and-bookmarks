@@ -6,6 +6,9 @@ from collections import OrderedDict
 # Configure logging
 # logging.basicConfig(filename='weather.log', level=logging.INFO)
 
+""" functions for getting weather for a specific latitude and longitude and extract the data in a useful 5 day format """
+
+
 # Read API key from environment variable
 api_key = os.environ['WEATHER_KEY']
 
@@ -40,7 +43,7 @@ def extract_data(forecast_response):
             day_of_week = date_time.strftime("%A") # get the day that this specific entry is on
             if day_of_week not in forecast.keys():
                 # Extract data from the forecast response and store it in the dictionary
-                # using the day of the week in as the dye and the time of day for each 3 hour section.
+                # using the day of the week for the key and the time of day for each 3 hour section.
                 # use a list for the specific data like temp
                 forecast[day_of_week] = [[
                                                         date_time.strftime("%X"),
