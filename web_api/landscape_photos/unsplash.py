@@ -1,6 +1,6 @@
 import requests
 import os
-from image import Image
+from .image import Image
 
 base_url = 'https://api.unsplash.com/search/photos?'
 key = os.environ.get('UNSPLASH_KEY')
@@ -19,7 +19,7 @@ def get_image_response():
         response.raise_for_status() # Raise exception if a client or server error occurs
         data = response.json()
         data_result = data.get('results')
-        return data_result, None # Return data in json format if no errors occured during request
+        return data_result, None # Return data in json format if no errors occurred during request
     except Exception as ex:
         return None, ex # Return any exceptions to be handled outside the function
     
