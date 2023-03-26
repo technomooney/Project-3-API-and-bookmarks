@@ -12,3 +12,15 @@ class Park:
         self.park_code = park_code
         self.phone = phone
         self.email = email
+
+# Creating a function to search for parks based on a query
+def search_parks(query):
+    # Set the API URL
+    url = 'https://developer.nps.gov/api/v1/parks'
+    # Set the query parameters
+    params = {
+        'q': query, # The search query
+        'fields': 'images', 
+        'api_key': os.environ.get('NPS_API_KEY') #The API key (I got the key stored on my pc)
+    }
+    
