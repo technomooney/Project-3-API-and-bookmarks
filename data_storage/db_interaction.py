@@ -1,7 +1,6 @@
 import requests
 import sqlite3
 import os
-from image import Image
 
 db = 'bookmark.db'
 

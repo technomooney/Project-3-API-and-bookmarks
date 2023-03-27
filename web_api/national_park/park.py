@@ -11,4 +11,10 @@ class Park:
         self.email = email
 
     def __repr__(self) -> str:
-        return f'\nPark({self.name} {self.description} {self.state_code} {self.latitude} {self.longitude} {self.park_code} {self.phone} {self.email})'
+        return f'''Name: {self.name}
+        Description: {self.description}
+        State Code: {self.state_code}
+        Latitude: {self.latitude}, Longitude: {self.longitude} 
+        Park Code: {self.park_code}
+        Contact Number: {self.phone}
+        Contact Email: {self.email})'''
