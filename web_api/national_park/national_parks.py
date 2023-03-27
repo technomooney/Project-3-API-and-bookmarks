@@ -25,7 +25,7 @@ def create_park_objects_list(data):
     """Create a Park object out of each object in the API response containing the park's
     name, description, state_code, location, park_code, phone, and email. 
     The function returns a list of park objects."""
-    park_data, error = data # Unpack tuple that holds either data or exception
+    park_data = data # Unpack tuple that holds either data or exception
     parks = [] # Store park objects
     
     for park in park_data:  # Create a park object for each set of results and add to the park list 
