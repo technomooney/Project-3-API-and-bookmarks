@@ -23,7 +23,11 @@ class ParksDB:
             Initializes the database by creating three tables: NPS, Unsplash, and OpenWeather.
             """
 
+<<<<<<< HEAD
             create_NPS_table = 'CREATE TABLE IF NOT EXISTS NPS (ParkCode TEXT PRIMARY KEY, ParkName TEXT, Latitude DECIMAL(3,8), Longitude DECIMAL(3,8), ParkDescription TEXT, StateCode TEXT, PhoneNum TEXT, Email TEXT)'
+=======
+            create_NPS_table = 'CREATE TABLE IF NOT EXISTS NPS (ParkCode TEXT  PRIMARY KEY, ParkName TEXT, Latitude DECIMAL(3,8), Longitude DECIMAL(3,8), ParkDescription TEXT, PhoneNum TEXT, Email TEXT)'
+>>>>>>> 2a7806c (i reintroduced the changes to the db_interactions file to have things working... this will likely cause merge conflicts but we will deal with them later)
 
             create_Unsplash_table = 'CREATE TABLE IF NOT EXISTS Unsplash (ParkCode TEXT PRIMARY KEY, ImageURL TEXT, ImageDescription TEXT, Creator TEXT, CreatorURL TEXT)'
 
@@ -70,8 +74,7 @@ class ParksDB:
         # execute SQL statement with park data
         conn = sqlite3.connect(db)
         with conn:
-            conn.execute(insert_sql, (park.park_code, park.name, park.latitude, park.longitude,
-                                      park.description,park.state_code, park.phone, park.email))
+            conn.execute(insert_sql, (park.park_code, park.name, park.latitude, park.longitude, park.description, park.phone, park.email))
         conn.commit()
         conn.close()
     
