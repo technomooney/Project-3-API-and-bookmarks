@@ -23,11 +23,11 @@ class ParksDB:
             Initializes the database by creating three tables: NPS, Unsplash, and OpenWeather.
             """
 
-            create_NPS_table = 'CREATE TABLE IF NOT EXISTS NPS (ParkCode INTEGER PRIMARY KEY, ParkName TEXT, Latitude DECIMAL(3,8), Longitude DECIMAL(3,8), ParkDescription TEXT, PhoneNum TEXT, Email TEXT)'
+            create_NPS_table = 'CREATE TABLE IF NOT EXISTS NPS (ParkCode TEXT PRIMARY KEY, ParkName TEXT, Latitude DECIMAL(3,8), Longitude DECIMAL(3,8), ParkDescription TEXT, PhoneNum TEXT, Email TEXT)'
 
-            create_Unsplash_table = 'CREATE TABLE IF NOT EXISTS Unsplash (ParkCode INTEGER PRIMARY KEY, ImageURL TEXT, ImageDescription TEXT, Creator TEXT, CreatorURL TEXT)'
+            create_Unsplash_table = 'CREATE TABLE IF NOT EXISTS Unsplash (ParkCode TEXT PRIMARY KEY, ImageURL TEXT, ImageDescription TEXT, Creator TEXT, CreatorURL TEXT)'
 
-            create_OpenWeather_table = 'CREATE TABLE IF NOT EXISTS OpenWeather (ParkCode INTEGER PRIMARY KEY, Day DATE, TimeOfDay DATETIME, Temperature DECIMAL(3,1), FeelsLike DECIMAL(3,1), WeatherDescription TEXT, WindSpeed DECIMAL(3,3), UNIQUE (Day, TimeOfDay))'
+            create_OpenWeather_table = 'CREATE TABLE IF NOT EXISTS OpenWeather (ParkCode TEXT PRIMARY KEY, Day DATE, TimeOfDay DATETIME, Temperature DECIMAL(3,1), FeelsLike DECIMAL(3,1), WeatherDescription TEXT, WindSpeed DECIMAL(3,3), UNIQUE (Day, TimeOfDay))'
 
             conn = sqlite3.connect(db)
 
