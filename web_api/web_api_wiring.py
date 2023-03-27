@@ -11,6 +11,7 @@ def get_unsplash_image_list():
 
     if error:
         print(f'An error has occurred: {error}') # TODO - switch to log instead of print
+        return None
     else: 
         image_list = unsplash.create_image_object_list(response) # Get image list from unsplash function if request is successful
         return image_list
@@ -26,6 +27,7 @@ def get_national_park_list(search_query):
 
     if error:
         print(f'An error has occurred: {error}') # TODO - switch to log instead of print
+        return None
     else: 
         parks_list = national_parks.create_park_objects_list(response) # Get parks list from national_parks function if request is successful
         return parks_list
@@ -41,6 +43,7 @@ def get_weather_forecast_object(lat, lon):
 
     if error:
         print(f'An error has occurred: {error}') # TODO - switch to log instead of print
+        return None
     else: 
         weather_forecast_dict = open_weather_map.extract_data(response) # Get weather forecast ordered dictionary if request is successful
         return weather_forecast_dict
