@@ -1,6 +1,7 @@
 import requests
 import os
-from .park import Park
+from .park import Park # remove the . from the "from .park import Park" statement if you plan on testing as a standalone file. 
+                                # (not importing the file into another module)
 
 api_key = os.environ.get('NPS_API_KEY')
 url = 'https://developer.nps.gov/api/v1/parks'
@@ -41,3 +42,10 @@ def create_park_objects_list(park_data):
         parks.append(park)
 
     return parks    
+
+
+# test as a standalone file. 
+if __name__ == '__main__':
+    data,error = get_parks_data('yellowstone')
+    park_list = create_park_objects_list(data)
+    print(park_list)
