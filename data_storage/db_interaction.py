@@ -131,7 +131,105 @@ class ParksDB:
         conn.commit()
         conn.close()
 
+    def get_park_info(self, park_code):
+        """
+        Retrieves information about a specific park from the NPS table.
 
-    
+        Parameters:
+        park_code (str): The park code of the park to retrieve.
+
+        Returns:
+        A dictionary containing information about the park, including its name, location, description,
+        phone number, and email.
+        """
+        select_sql = '''SELECT ParkName, Latitude, Longitude, ParkDescription, PhoneNum, Email
+                         FROM NPS
+                         WHERE ParkCode = ?'''
+
+        conn = sqlite3.connect(db)
+        with conn:
+            result = conn.execute(select_sql, (park_code,)).fetchone()
+
+        if result:
+            park_info = {
+                'park_code': park_code,
+                'park_name': result[0],
+                'latitude': result[1],
+                'longitude': result [2],
+                'description': result[3],
+                'phone': result[4],
+                'email': result[5]
+            }
+            return park_info
+        else:
+            return None
+
+    def get_park_image(self, park_code):
+        """
+        Retrieves an image of a specific park from the Unsplash table.
+
+        Parameters:
+        park_code (str): The park code of the park to retrieve the image for.
+
+        Returns:
+        A dictionary containing information about the image, including its URL, description, and creator information.
+        """
+        select_sql = '''SELECT ImageURL, ImageDescription, Creator, CreatorURL
+                         FROM Unsplash
+                         WHERE ParkCode = ?'''
+
+        conn = sqlite3.connect(db)
+        with conn:
+            result = conn.execute(select_sql, (park_code,)).fetchone()
+
+        if result:
+            image_info = {
+                'park_code': park_code,
+                'image_url': result[0],
+                'description': result[1],
+                'creator_name': result[2],
+                'creator_link': result[3]
+            }
+            return image_info
+        else:
+            return None
+
+    def get_park_weather(self, park_code):
+        """
+        Retrieves weather information for a specific park from the OpenWeather table.
+
+        Parameters:
+        park_code (str): The park code of the park to retrieve the weather for.
+
+        Returns:
+        A list of dictionaries, with each dictionary representing a forecast for a specific day and time.
+        Each dictionary contains the day, time, temperature, "feels like" temperature, weather description,
+        and wind speed for the forecast.
+        """
+        select_sql = '''SELECT Day, TimeOfDay, Temperature, FeelsLike, WeatherDescription, WindSpeed
+                         FROM OpenWeather
+                         WHERE ParkCode = ?
+                         ORDER BY Day, TimeOfDay'''
+
+        conn = sqlite3.connect(db)
+        with conn:
+            results = conn.execute(select_sql, (park_code,)).fetchall()
+
+        if results:
+            weather_info = []
+            for result in results:
+                weather_info.append({
+                    'park_code': park_code,
+                    'day': result[0],
+                    'time': result[1],
+                    'temperature': result[2],
+                    'feels_like': result[3],
+                    'description': result[4],
+                    'wind_speed': result[5]
+                })
+            return weather_info
+        else:
+            return None
+
 if __name__ == '__main__':
     ParksDB()
