@@ -1,18 +1,5 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<div>
-    <h1>Find a National Park and bookmark it!</h1>
-</div>
-<br>
-  {% include 'carousel.html' %}
-    <div class="mb-3">
-        <form class="input-group bg-color-custom" method="post">
-            <input placeholder="Search for a Park" class="form-control" type="text" id="search_query" name="search_query">
-            <button class="btn btn-primary" type="submit"> Search </button>
-        </form>
-    </div>
-    {% if park_data %}
+{% block results %}
+{% if park_data %}
     <h4>Results:</h4>
     <ul class="list-group">
         {% for item in park_data %}
@@ -27,8 +14,5 @@
         </li>
         {% endfor %}
     </ul>
-    {% endif %}
-    
-    {# include 'current_data.html' #}
-</div>
+{% endif %}
 {% endblock %}

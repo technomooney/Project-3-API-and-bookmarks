@@ -35,9 +35,14 @@ def create_park_objects_list(park_data):
         latitude = park.get('latitude')
         longitude = park.get('longitude')
         park_code = park.get('parkCode')
-        phone = park.get('contacts').get('phoneNumbers')[0].get('phoneNumber')
-        email = park.get('contacts').get('emailAddresses')[0].get('emailAddress')
-
+        try:
+            phone = park.get('contacts').get('phoneNumbers')[0].get('phoneNumber')
+        except IndexError:
+            phone = None
+        try:
+            email = park.get('contacts').get('emailAddresses')[0].get('emailAddress')
+        except IndexError:
+            email = None
         park = Park(name, description, state_code, latitude, longitude, park_code, phone, email)
         parks.append(park)
 
