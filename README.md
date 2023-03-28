@@ -22,4 +22,15 @@ Once selected, the user will be shown information regarding that park.
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/111803746/228324007-e48871ba-e7d1-44af-86f2-7fdb2410aef4.png)
+Home page
+
+![image](https://user-images.githubusercontent.com/111803746/228331364-44aafd0f-5d21-4c32-b48c-6916652aae15.png)
+
+Search results
+
+![image](https://user-images.githubusercontent.com/111803746/228331438-854fb299-d068-4c87-b7a6-d2b92b80e7cf.png)
+
+Saved results
+
+![image](https://user-images.githubusercontent.com/111803746/228331547-8788c2de-439c-40f4-9480-4bac82226c68.png)
+
