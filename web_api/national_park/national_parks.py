@@ -1,6 +1,7 @@
 import requests
 import os
-from park import Park
+from .park import Park # remove the . from the "from .park import Park" statement if you plan on testing as a standalone file. 
+                                # (not importing the file into another module)
 
 api_key = os.environ.get('NPS_API_KEY')
 url = 'https://developer.nps.gov/api/v1/parks'
@@ -21,24 +22,30 @@ def get_parks_data(query):
         return None, ex # If an exceptions occur, return None instead of data, and the exception
 
 
-def create_park_objects_list(data):
+def create_park_objects_list(park_data):
     """Create a Park object out of each object in the API response containing the park's
     name, description, state_code, location, park_code, phone, and email. 
     The function returns a list of park objects."""
-    park_data, error = data # Unpack tuple that holds either data or exception
     parks = [] # Store park objects
     
     for park in park_data:  # Create a park object for each set of results and add to the park list 
-        name = park['fullName'],
-        description = park['description'],
-        state_code = park['states'],
-        latitude = park['latitude']
-        longitude = park['longitude']
-        park_code = park['parkCode'],
-        phone = park['contacts']['phoneNumbers'][0]['phoneNumber'],
-        email = park['contacts']['emailAddresses'][0]['emailAddress']
+        name = park.get('fullName')
+        description = park.get('description')
+        state_code = park.get('states')
+        latitude = park.get('latitude')
+        longitude = park.get('longitude')
+        park_code = park.get('parkCode')
+        phone = park.get('contacts').get('phoneNumbers')[0].get('phoneNumber')
+        email = park.get('contacts').get('emailAddresses')[0].get('emailAddress')
 
         park = Park(name, description, state_code, latitude, longitude, park_code, phone, email)
         parks.append(park)
 
     return parks    
+
+
+# test as a standalone file. 
+if __name__ == '__main__':
+    data,error = get_parks_data('yellowstone')
+    park_list = create_park_objects_list(data)
+    print(park_list)
