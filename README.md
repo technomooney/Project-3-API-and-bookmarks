@@ -21,3 +21,5 @@ The user will search for a park, and be presented a list of potential matches. T
 Once selected, the user will be shown information regarding that park.
 
 ## Screenshots
+
+![image](https://user-images.githubusercontent.com/111803746/228324007-e48871ba-e7d1-44af-86f2-7fdb2410aef4.png)
