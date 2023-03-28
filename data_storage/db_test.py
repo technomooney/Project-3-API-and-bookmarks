@@ -50,7 +50,7 @@ class TestParksDatabase(unittest.TestCase):
         self.cursor.execute("PRAGMA table_info(NPS)")
         columns = self.cursor.fetchall()
         expected_columns = [
-            (0, 'ParkCode', 'INTEGER', 0, None, 1),
+            (0, 'ParkCode', 'TEXT', 0, None, 1),
             (1, 'ParkName', 'TEXT', 0, None, 0),
             (2, 'Latitude', 'DECIMAL(3,8)', 0, None, 0),
             (3, 'Longitude', 'DECIMAL(3,8)', 0, None, 0),
@@ -65,7 +65,7 @@ class TestParksDatabase(unittest.TestCase):
         self.cursor.execute("PRAGMA table_info(Unsplash)")
         columns = self.cursor.fetchall()
         expected_columns = [
-            (0, 'ParkCode', 'INTEGER', 0, None, 1),
+            (0, 'ParkCode', 'TEXT', 0, None, 1),
             (1, 'ImageURL', 'TEXT', 0, None, 0),
             (2, 'ImageDescription', 'TEXT', 0, None, 0),
             (3, 'Creator', 'TEXT', 0, None, 0),
@@ -78,7 +78,7 @@ class TestParksDatabase(unittest.TestCase):
         self.cursor.execute("PRAGMA table_info(OpenWeather)")
         columns = self.cursor.fetchall()
         expected_columns = [
-            (0, 'ParkCode', 'INTEGER', 0, None, 1),
+            (0, 'ParkCode', 'TEXT', 0, None, 1),
             (1, 'Day', 'DATE', 0, None, 0),
             (2, 'TimeOfDay', 'DATETIME', 0, None, 0),
             (3, 'Temperature', 'DECIMAL(3,1)', 0, None, 0),
@@ -91,7 +91,7 @@ class TestParksDatabase(unittest.TestCase):
     # This tests all three tables to make sure data can be inserted into them correctly
     def test_insert_new_row_updates_info(self):
         # Insert a new park into the NPS table
-        park_code = 12345
+        park_code = "12345"
         park_name = "New Park"
         latitude = 37.7749
         longitude = -122.4194
@@ -113,7 +113,7 @@ class TestParksDatabase(unittest.TestCase):
         self.assertEqual(result[6], email)
 
         # Insert a new image into the Unsplash table
-        park_code = 12345
+        park_code = "12345"
         image_url = "https://unsplash.com/photos/xxxxxx"
         image_description = "Beautiful scenery"
         creator = "John Doe"
@@ -131,7 +131,7 @@ class TestParksDatabase(unittest.TestCase):
         self.assertEqual(result[4], creator_url)
 
         # Insert a new weather data into the OpenWeather table
-        park_code = 12345
+        park_code = "12345"
         day = "2022-01-01"
         time_of_day = "12:00:00"
         temperature = 50.5
