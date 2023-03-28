@@ -1,6 +1,6 @@
 import requests
 import os
-from image import Image
+from .image import Image
 
 base_url = 'https://api.unsplash.com/search/photos?'
 key = os.environ.get('UNSPLASH_KEY')

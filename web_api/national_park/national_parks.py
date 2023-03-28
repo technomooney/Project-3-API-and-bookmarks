@@ -43,7 +43,6 @@ def create_park_objects_list(park_data):
 
     return parks    
 
-
 # test as a standalone file. 
 if __name__ == '__main__':
     data,error = get_parks_data('yellowstone')
