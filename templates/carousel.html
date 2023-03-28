@@ -12,9 +12,9 @@
         <div class="carousel-inner">
           {% for image in image_list %}
           <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-            <img src="{{ image.file }}"  class="d-block w-100" alt="Slide number {{ loop.index }}" >
+            <img src="{{ image.image_url }}"  class="d-block w-100" alt="Slide number {{ loop.index }}" >
             <div class="carousel-caption d-none d-md-block ">
-              <p class="bs-light-border-subtle">Owner: {{ image.owner }}</p>
+              <p class="bs-light-border-subtle">Owner: {{ image.creator_name }}</p>
             </div>
           </div>
           {% endfor %}

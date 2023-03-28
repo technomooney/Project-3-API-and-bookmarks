@@ -1,0 +1,18 @@
+{% block results %}
+{% if park_data %}
+    <h4>Results:</h4>
+    <ul class="list-group">
+        {% for item in park_data %}
+        <li class="list-group-item"><h5>Name</h5><span>{{ item.name }}</span> <br>
+            <h5>Description:</h5><span>{{ item.description }}</span> <br>
+            <form action="/save" method="post">
+                <label class="form-check-label">Include Weather?</label> <input class="form-check-input" name="include_weather_checkbox" type="checkbox">
+                <input value="{{item.park_code}}" name="park_to_save" type="hidden">
+                <button class="btn btn-sm btn-outline-primary" type="submit">Bookmark</button>
+
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

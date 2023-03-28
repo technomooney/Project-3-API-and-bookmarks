@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
-        "parkweather"
+<<<<<<< HEAD
+        "dotenv",
+        "openweather"
+=======
+        "dotenv"
+>>>>>>> 2a7806c990520505ef07bc7dad6b18015141cefd
     ]
 }
