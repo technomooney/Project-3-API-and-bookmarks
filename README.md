@@ -1,9 +1,11 @@
 # National Park Searcher
 
-This is a project that allows you to search for National Parks, and then receive in depth data regarding the park of your choice. 
+This is a project that allows the user to search for National Parks, and then receive in depth data regarding the park of choice. 
 
 ## Features/Description
 
+When a National Park is chosen the application will display its name, park code, latitude, longitude, phone number, email, 
+a description of the park, an image of the park, and a current forecast for the park.
 
 ## Installation
 
@@ -15,5 +17,7 @@ pip install -r requirements.txt
 
 ## Usage
 
+The user will search for a park, and be presented a list of potential matches. They can then select the park they want more info on.
+Once selected, the user will be shown information regarding that park.
 
 ## Screenshots
