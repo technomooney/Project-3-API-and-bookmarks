@@ -2,7 +2,9 @@
 
 {% block content %}
 <h1>Saved Park info</h1>
-
+{% if park_data %}
 {% include 'results.html' %}
-
+{% else %}
+<p>There are no saved parks</p>
+{% endif %}
 {% endblock %}
