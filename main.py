@@ -45,8 +45,8 @@ def save():
 @app.route("/display_saved_parks")
 def display_saved_parks():
     saved_parks = current_park_db.get_all_park_info()
-    
-    return render_template('base.html')
+    print(saved_parks)
+    return render_template('display_saved_parks.html', park_data=saved_parks)
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0')

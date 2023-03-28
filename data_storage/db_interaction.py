@@ -131,7 +131,7 @@ class ParksDB:
         conn.commit()
         conn.close()
 
-    def get_all_park_info(self,limit = None):
+    def get_all_park_info(self):
         """
         Retrieves information about a specific park from the NPS table.
 
@@ -148,19 +148,20 @@ class ParksDB:
 
         conn = sqlite3.connect(db)
         with conn:
-            results = conn.execute(select_sql).fetchmany()
+            results = conn.execute(select_sql).fetchall()
             if results:
                 retrieved_park_list = []
                 for result in results:
-                    park_code = park_code
-                    park_name = result[0]
-                    latitude = result[1]
-                    longitude = result [2]
-                    description = result[3]
-                    state_code = result[4]
-                    phone = result[5]
-                    email = result[6]
+                    park_code = result[0]
+                    park_name = result[1]
+                    latitude = result[2]
+                    longitude = result [3]
+                    description = result[4]
+                    state_code = result[5]
+                    phone = result[6]
+                    email = result[7]
                     retrieved_park = Park(park_name, description, state_code, latitude, longitude, park_code, phone, email)
+                    retrieved_park_list.append(retrieved_park)
                 return retrieved_park_list
             else:
                 return None
